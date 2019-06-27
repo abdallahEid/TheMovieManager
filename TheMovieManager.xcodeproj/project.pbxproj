@@ -35,6 +35,8 @@
 		2316888D2122322D003C820E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2316888C2122322D003C820E /* Colors.swift */; };
 		2316888F2122646A003C820E /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2316888E2122646A003C820E /* GradientView.swift */; };
 		2316889121226AE7003C820E /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2316889021226AE7003C820E /* LoginTextField.swift */; };
+		BB26E22022C57A50003908E6 /* AuthenticationAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB26E21F22C57A50003908E6 /* AuthenticationAPIs.swift */; };
+		BB26E22222C57AAC003908E6 /* MoviesAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB26E22122C57AAC003908E6 /* MoviesAPIs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		2316888C2122322D003C820E /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		2316888E2122646A003C820E /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		2316889021226AE7003C820E /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
+		BB26E21F22C57A50003908E6 /* AuthenticationAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPIs.swift; sourceTree = "<group>"; };
+		BB26E22122C57AAC003908E6 /* MoviesAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesAPIs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +165,8 @@
 			children = (
 				2316886B2121CAF6003C820E /* TMDBClient.swift */,
 				231688882121CC10003C820E /* TMDBTypes.swift */,
+				BB26E21F22C57A50003908E6 /* AuthenticationAPIs.swift */,
+				BB26E22122C57AAC003908E6 /* MoviesAPIs.swift */,
 			);
 			path = "TMDB Client";
 			sourceTree = "<group>";
@@ -279,7 +285,9 @@
 				231688852121CBEA003C820E /* LogoutRequest.swift in Sources */,
 				2316885F2121CA19003C820E /* MovieDetailViewController.swift in Sources */,
 				231688812121CBD6003C820E /* MarkWatchlist.swift in Sources */,
+				BB26E22022C57A50003908E6 /* AuthenticationAPIs.swift in Sources */,
 				231688612121CA30003C820E /* SearchViewController.swift in Sources */,
+				BB26E22222C57AAC003908E6 /* MoviesAPIs.swift in Sources */,
 				231688772121CB50003C820E /* MovieResults.swift in Sources */,
 				231688872121CBF9003C820E /* PostSession.swift in Sources */,
 				2316888D2122322D003C820E /* Colors.swift in Sources */,

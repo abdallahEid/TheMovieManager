@@ -17,7 +17,7 @@ class WatchlistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        _ = TMDBClient.getWatchlist() { movies, error in
+        _ = MoviesAPIs.getWatchlist() { movies, error in
             MovieModel.watchlist = movies
             DispatchQueue.main.async {
                 self.tableView.reloadData()
