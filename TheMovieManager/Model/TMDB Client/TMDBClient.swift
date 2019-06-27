@@ -27,8 +27,10 @@ class TMDBClient {
         case createSessionID
         case webAuth
         case logout
+        
         case getWatchlist
         case getFavorites
+        case searchMovies(String)
         
         var stringValue: String {
             switch self {
@@ -42,10 +44,13 @@ class TMDBClient {
                 return "https://www.themoviedb.org/authenticate/" + Auth.requestToken + "?redirect_to=themoviemanager:authenticate"
             case .logout:
                 return "/authentication/session" + Endpoints.apiKeyParam
+                
             case .getWatchlist:
                 return Endpoints.base + "/account/\(Auth.accountId)/watchlist/movies" + Endpoints.apiKeyParam + "&session_id=\(Auth.sessionId)"
             case.getFavorites:
                 return Endpoints.base + "/account/\(Auth.accountId)/favorite/movies" + Endpoints.apiKeyParam + "&session_id=\(Auth.sessionId)"
+            case .searchMovies(let query):
+                return Endpoints.base + "/search/movie" + Endpoints.apiKeyParam + "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
             }
         }
         

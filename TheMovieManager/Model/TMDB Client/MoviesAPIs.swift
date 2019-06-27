@@ -28,4 +28,14 @@ class MoviesAPIs {
             }
         }
     }
+    
+    class func searchMovies(query: String, completion: @escaping ([Movie], Error?) -> Void){
+        TMDBClient.taskForGetRequest(url: TMDBClient.Endpoints.searchMovies(query).url, response: MovieResults.self) { (response, error) in
+            if let response = response {
+                completion(response.results, nil)
+            } else {
+                completion([], error)
+            }
+        }
+    }
 }
