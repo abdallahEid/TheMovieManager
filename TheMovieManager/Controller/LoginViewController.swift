@@ -23,12 +23,47 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginTapped(_ sender: UIButton) {
-        
-        performSegue(withIdentifier: "completeLogin", sender: nil)
+        print("here")
+        TMDBClient.getRequestToken(completion: getRequestCompletionHandler(success:error:))
     }
     
     @IBAction func loginViaWebsiteTapped() {
-        performSegue(withIdentifier: "completeLogin", sender: nil)
+        TMDBClient.getRequestToken { (success, error) in
+            if success {
+                DispatchQueue.main.async {
+                    UIApplication.shared.open(TMDBClient.Endpoints.webAuth.url, options: [:], completionHandler: nil)
+                }
+            }
+        }
     }
     
+    func getRequestCompletionHandler(success: Bool?, error: Error?){
+        guard success != nil else {
+            print(error?.localizedDescription ?? " ")
+            return
+        }
+        print(TMDBClient.Auth.requestToken)
+        DispatchQueue.main.async {
+            TMDBClient.login(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "" , completion: self.loginCompletionHandler(success:error:))
+        }
+    }
+    
+    func loginCompletionHandler(success: Bool?, error: Error?){
+        guard success != nil else {
+            print(error?.localizedDescription ?? " ")
+            return
+        }
+        print(TMDBClient.Auth.requestToken)
+        TMDBClient.createSessionID(completion: createSessionCompletionHandler(success:error:))
+    }
+    
+    func createSessionCompletionHandler(success: Bool?, error: Error?){
+        guard success != nil else {
+            print(error?.localizedDescription ?? " ")
+            return
+        }
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "completeLogin", sender: nil)
+        }
+    }
 }
