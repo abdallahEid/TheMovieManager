@@ -22,14 +22,13 @@ class TMDBClient {
         static let base = "https://api.themoviedb.org/3"
         static let apiKeyParam = "?api_key=\(TMDBClient.apiKey)"
         
-        // Auth
         case getRequestToken
         case login
         case createSessionID
         case webAuth
         case logout
-        // After Auth 
         case getWatchlist
+        case getFavorites
         
         var stringValue: String {
             switch self {
@@ -45,6 +44,8 @@ class TMDBClient {
                 return "/authentication/session" + Endpoints.apiKeyParam
             case .getWatchlist:
                 return Endpoints.base + "/account/\(Auth.accountId)/watchlist/movies" + Endpoints.apiKeyParam + "&session_id=\(Auth.sessionId)"
+            case.getFavorites:
+                return Endpoints.base + "/account/\(Auth.accountId)/favorite/movies" + Endpoints.apiKeyParam + "&session_id=\(Auth.sessionId)"
             }
         }
         

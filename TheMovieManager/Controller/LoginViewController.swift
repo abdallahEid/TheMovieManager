@@ -62,6 +62,7 @@ class LoginViewController: UIViewController {
             print(error?.localizedDescription ?? " ")
             return
         }
+        print(TMDBClient.Auth.sessionId)
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "completeLogin", sender: nil)
         }

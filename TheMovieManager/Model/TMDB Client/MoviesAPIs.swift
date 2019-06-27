@@ -18,4 +18,14 @@ class MoviesAPIs {
             }
         }
     }
+    
+    class func getFavorites(completion: @escaping ([Movie], Error?) -> Void) {
+        TMDBClient.taskForGetRequest(url: TMDBClient.Endpoints.getFavorites.url, response: MovieResults.self) { (response, error) in
+            if let response = response {
+                completion(response.results, nil)
+            } else {
+                completion([], error)
+            }
+        }
+    }
 }

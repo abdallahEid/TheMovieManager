@@ -17,6 +17,13 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        _ = MoviesAPIs.getFavorites() { movies, error in
+            MovieModel.favorites = movies
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
