@@ -31,6 +31,9 @@ class TMDBClient {
         case getWatchlist
         case getFavorites
         case searchMovies(String)
+        case markWatchList
+        case markFavorite
+        case getPosterImage(String)
         
         var stringValue: String {
             switch self {
@@ -51,6 +54,12 @@ class TMDBClient {
                 return Endpoints.base + "/account/\(Auth.accountId)/favorite/movies" + Endpoints.apiKeyParam + "&session_id=\(Auth.sessionId)"
             case .searchMovies(let query):
                 return Endpoints.base + "/search/movie" + Endpoints.apiKeyParam + "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
+            case .markWatchList:
+                return Endpoints.base + "/account/\(Auth.accountId)/watchlist" + Endpoints.apiKeyParam + "&session_id=\(Auth.sessionId)"
+            case .markFavorite:
+                return Endpoints.base + "/account/\(Auth.accountId)/favorite" + Endpoints.apiKeyParam + "&session_id=\(Auth.sessionId)"
+            case .getPosterImage(let path):
+                return "https://image.tmdb.org/t/p/w500/\(path)"
             }
         }
         
