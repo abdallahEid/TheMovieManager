@@ -79,7 +79,13 @@ class TMDBClient {
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
                 completion(responseObject, nil)
             } catch {
-                completion(nil, error)
+                do {
+                    let errorResponse = try! decoder.decode(TMDBResponse.self, from: data)
+                    
+                    completion(nil, errorResponse)
+                } catch {
+                    completion(nil, error)
+                }
             }
         }
         task.resume()
@@ -96,14 +102,19 @@ class TMDBClient {
                 completion(nil, error)
                 return
             }
+            let decoder = JSONDecoder()
             do {
-                let decoder = JSONDecoder()
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
                 completion(responseObject, nil)
             } catch {
-                completion(nil, error)
+                do {
+                    let errorResponse = try decoder.decode(TMDBResponse.self, from: data)
+                    
+                    completion(nil, errorResponse)
+                } catch {
+                    completion(nil, error)
+                }
             }
-            
         }
         task.resume()
     }
