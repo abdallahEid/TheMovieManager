@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let retrievedRequestToken: String? = KeychainWrapper.standard.string(forKey: "requestToken")
+        let retrievedSessionId: String? = KeychainWrapper.standard.string(forKey: "sessionId")
+
+        if let retrievedRequestToken = retrievedRequestToken, let retrievedSessionId = retrievedSessionId {
+            TMDBClient.Auth.requestToken = retrievedRequestToken
+            TMDBClient.Auth.sessionId = retrievedSessionId
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "tabBarController")
+            window?.rootViewController = initialViewController
+            window?.makeKeyAndVisible()
+        }
         return true
     }
 

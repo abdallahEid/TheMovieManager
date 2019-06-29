@@ -80,7 +80,7 @@ class TMDBClient {
                 completion(responseObject, nil)
             } catch {
                 do {
-                    let errorResponse = try! decoder.decode(TMDBResponse.self, from: data)
+                    let errorResponse = try decoder.decode(TMDBResponse.self, from: data)
                     
                     completion(nil, errorResponse)
                 } catch {

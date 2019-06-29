@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftKeychainWrapper
 
 class AuthenticationAPIs {
     class func getRequestToken(completion: @escaping (Bool, Error?) -> Void){
@@ -37,7 +38,13 @@ class AuthenticationAPIs {
         TMDBClient.taskForPostRequest(url: TMDBClient.Endpoints.createSessionID.url, method: "POST", requestBody: requestBody, reponse: SessionResponse.self) { (response, error) in
             if let response = response {
                 TMDBClient.Auth.sessionId = response.sessionId
-                completion(true, nil)
+                let saveRequestToken: Bool = KeychainWrapper.standard.set(TMDBClient.Auth.requestToken, forKey: "requestToken")
+                let saveSessionId: Bool = KeychainWrapper.standard.set(TMDBClient.Auth.sessionId, forKey: "sessionId")
+                if (saveSessionId && saveRequestToken){
+                    completion(true, nil)
+                } else {
+                    completion(false, error)
+                }
             } else {
                 completion(false, error)
             }
@@ -54,7 +61,13 @@ class AuthenticationAPIs {
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             TMDBClient.Auth.requestToken = ""
             TMDBClient.Auth.sessionId = ""
-            completion()
+            let removeRequestToken: Bool = KeychainWrapper.standard.removeObject(forKey: "requestToken")
+            let removeSessionId: Bool = KeychainWrapper.standard.removeObject(forKey: "sessionId")
+            if removeRequestToken && removeSessionId {
+                completion()
+            } else{
+                print("How")
+            }
         }
         task.resume()
     }
