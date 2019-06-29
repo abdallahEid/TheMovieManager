@@ -29,6 +29,7 @@ class MovieDetailViewController: UIViewController {
         
         navigationItem.title = movie.title
         
+        imageView.image = UIImage(named: "PosterPlaceholder")
         if let posterPath = movie.posterPath {
             MoviesAPIs.downloadPosterImage(imagePath: posterPath, completion: posterImageCompletionHandler(data:error:))
         }
